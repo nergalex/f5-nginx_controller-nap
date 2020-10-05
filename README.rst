@@ -34,7 +34,7 @@ Ecosystem
 *********************
 - NGINX+
 - NGINX App Protect
-- NGINX Controller
+- NGINX Controller + Application Delivery licence
 - Ansible Tower
 - Consul by Hashicorp
 - GitHub webhook
@@ -94,6 +94,7 @@ Copy modules below to ``/etc/ansible/roles/azure.azure_preview_modules/library/`
 
 Consul
 ***************************
+
 .. code:: bash
     $ sudo /var/lib/awx/venv/my_env/bin/pip install python-consul
 
