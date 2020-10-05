@@ -250,7 +250,7 @@ Webhook
 ##############
 `configuration guide <https://docs.ansible.com/ansible-tower/latest/html/userguide/webhooks.html#github-webhook-setup>`_
 
-E) [SecOps] Attach a WAF policy to an Application
+E) [SecOps] Remove a specific WAF policy from an Application
 ==================================================
 Create and launch a job template ``poc-consul_nap-server_name_delete``:
 
