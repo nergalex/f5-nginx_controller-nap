@@ -1,0 +1,5 @@
+    app_protect_cookie_seed jkldsf90upiokasdj120;
+    app_protect_enable on;
+    app_protect_security_log_enable on;
+    app_protect_policy_file "/etc/nginx/nap/policy/default.json";
+    app_protect_security_log "/etc/nginx/nap/log_format/default.json" syslog:server={{ extra_app_protect_monitor_ip }}:{{ extra_app_protect_monitor_port }};

@@ -1,0 +1,49 @@
+---
+- name: DEBUG stats_consul_list
+  debug:
+    var: stats_consul_list
+
+- name: INSTALL package
+  package:
+    name:
+      - git
+    state: present
+
+- name: CREATE NAP directoty
+  file:
+    path: "/etc/nginx/nap"
+    state: directory
+
+- name: FETCH git NAP configuration
+  git:
+    repo: '{{ extra_nap_repo }}'
+    dest: "/etc/nginx/nap/"
+
+- name: Enable NAP module
+  blockinfile:
+    path: /etc/nginx/nginx.conf
+    insertbefore: "events {"
+    block: "{{ lookup('template','nap_module.json') }}"
+    marker: "# {mark} Ansible - Enable module"
+
+- name: Enable WAF default policy
+  blockinfile:
+    path: /etc/nginx/nginx.conf
+    insertafter: "http {"
+    block: "{{ lookup('template','nap_default_policy.json') }}"
+    marker: "# {mark} Ansible - Enable default policy"
+
+- name: Enable WAF specific policy
+  blockinfile:
+    path: /etc/nginx/nginx.conf
+    insertafter: "server_name {{ item.key }};"
+    block: "{{ lookup('template','nap_specific_policy.json') }}"
+    marker: "# {mark} Ansible - Enable specific policy for {{ item.key }}"
+  loop: "{{ stats_consul_list }}"
+
+- name: reload nginx
+  service:
+    name: nginx
+    state: reloaded
+
+...

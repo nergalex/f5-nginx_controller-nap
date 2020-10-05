@@ -1,0 +1,43 @@
+---
+- name: GET list
+  consul_kv:
+    scheme: "{{extra_consul_agent_scheme}}"
+    validate_certs: no
+    host: "{{extra_consul_agent_ip}}"
+    port: "{{extra_consul_agent_port}}"
+    recurse: yes
+    key: "{{ extra_consul_path_source_of_truth }}/{{ extra_consul_path_lookup }}"
+  register: retrieved_records
+
+- name: INIT var_values
+  set_fact:
+    var_values: []
+  when: retrieved_records.data != None
+
+- name: SET var_values
+  set_fact:
+    var_values: "{{ var_values }} + [ {
+      'Value': {{ item.Value }}
+    } ]"
+  loop: "{{ retrieved_records.data }}"
+  when: retrieved_records.data != None
+
+- name: INIT var_result
+  set_fact:
+    var_result: []
+
+- name: SET var_result
+  set_fact:
+    var_result: "{{ var_result + [ {
+      'key': item.0.Key.split(extra_consul_path_source_of_truth).1.split('/').2,
+      'value': item.1.Value
+    } ] }}"
+  loop: "{{ retrieved_records.data|zip(var_values)|list }}"
+  when: retrieved_records.data != None
+
+- name: "Artifact for Tower Workflows"
+  set_stats:
+    data:
+      stats_consul_list:  "{{ var_result }}"
+
+...

@@ -1,0 +1,2 @@
+        app_protect_enable {{ item.value.enable }};
+        app_protect_policy_file "/etc/nginx/nap/policy/{{ item.value.waf_policy }}";
