@@ -46,6 +46,8 @@ Demo
 
     <a href="http://www.youtube.com/watch?v=wqIGWfW5Dmo"><img src="http://img.youtube.com/vi/wqIGWfW5Dmo/0.jpg" width="600" height="400" title="Automate an Application deployment" alt="Automate an Application deployment"></a>
 
+`MP4 link for F5 customer and partners: <https://f5-my.sharepoint.com/:v:/r/personal/al_dacosta_f5_com/Documents/demo_video/NGINX%20Controller%20AD%20+%20NAP.mp4?csf=1&web=1&e=f3ljRv>`_
+
 Pre-requisites
 ==============
 
