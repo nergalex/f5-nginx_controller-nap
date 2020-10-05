@@ -9,11 +9,11 @@ Use Case
 - **Security** -- Secure applications with customized WAF policies
 - **Role Base Access Control** -- Delegate Reverse-Proxy configuration to DevOps and WAF policies to SecOps
 - **Automation** -- Automate changes:
-A) [SecOps] *Attach a WAF policy to an Application*: A default WAF policy is applied, unless a specific WAF policy is set by SecOps
-B) [DevOps] *Deploy an Application*: DevOps deploy Applications, regardless of WAF policies set
-C) [SecOps] *Update WAF policies*: SecOps update WAF policies
-D) [DevOps] *Remove an Application*
-E) [SecOps] *Detach a WAF policy from an Application*
+A) [SecOps] **Attach a WAF policy to an Application** -- A default WAF policy is applied, unless a specific WAF policy is set by SecOps
+B) [DevOps] **Deploy an Application** -- DevOps deploy Applications, regardless of WAF policies set
+C) [SecOps] **Update WAF policies** -- SecOps update WAF policies
+D) [DevOps] **Remove an Application**
+E) [SecOps] **Detach a WAF policy from an Application**
 
 Benefit
 ###############
