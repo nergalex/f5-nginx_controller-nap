@@ -71,6 +71,7 @@ If you use Ansible for Azure resource provisioning purpose, you're strongly enco
 Follow `install guide <https://github.com/Azure/azure_preview_modules>`_
 
 .. code:: bash
+
     $ sudo ansible-galaxy install azure.azure_preview_modules
     $ sudo /var/lib/awx/venv/my_env/bin/pip install -U -r /etc/ansible/roles/azure.azure_preview_modules/files/requirements-azure.txt
     $ sudo /var/lib/awx/venv/my_env/bin/pip show azure-mgmt-compute
@@ -79,6 +80,7 @@ If ``azure-mgmt-compute`` < ``10.0.0`` then use last update from azure_preview_m
 ``/etc/ansible/roles/`` is an example of an Tower installation where ``roles`` are located.
 
 .. code:: bash
+
     $ sudo cd /etc/ansible/roles/
     $ sudo git clone https://github.com/Azure/azure_preview_modules.git
     $ sudo /var/lib/awx/venv/my_env/bin/pip install -r /etc/ansible/roles/azure.azure_preview_modules/files/requirements-azure.txt
@@ -96,6 +98,7 @@ Consul
 ***************************
 
 .. code:: bash
+
     $ sudo /var/lib/awx/venv/my_env/bin/pip install python-consul
 
 VMSS credential
