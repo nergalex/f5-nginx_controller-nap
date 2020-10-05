@@ -44,7 +44,7 @@ Demo
 - Automate an Application deployment
 .. raw:: html
 
-    <a href="http://www.youtube.com/watch?v=p1rfhssaE_U"><img src="http://img.youtube.com/vi/p1rfhssaE_U/0.jpg" width="600" height="400" title="Automate an Application deployment" alt="Automate an Application deployment"></a>
+    <a href="http://www.youtube.com/watch?v=wqIGWfW5Dmo"><img src="http://img.youtube.com/vi/wqIGWfW5Dmo/0.jpg" width="600" height="400" title="Automate an Application deployment" alt="Automate an Application deployment"></a>
 
 Pre-requisites
 ==============
