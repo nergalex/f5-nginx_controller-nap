@@ -9,8 +9,8 @@ Use Case
 - **Security** -- Secure applications with customized WAF policies
 - **Role Base Access Control** -- Delegate Reverse-Proxy configuration to DevOps and WAF policies to SecOps
 - **Automation** -- Automate changes:
-A) [SecOps] **Attach a WAF policy to an Application** -- A default WAF policy is applied, unless a specific WAF policy is set by SecOps
-B) [DevOps] **Deploy an Application** -- DevOps deploy Applications, regardless of WAF policies set
+A) [DevOps] **Deploy an Application** -- DevOps deploy Applications, regardless of WAF policies set
+B) [SecOps] **Attach a WAF policy to an Application** -- A default WAF policy is applied, unless a specific WAF policy is set by SecOps
 C) [SecOps] **Update WAF policies** -- SecOps update WAF policies
 D) [DevOps] **Remove an Application**
 E) [SecOps] **Detach a WAF policy from an Application**
@@ -136,29 +136,7 @@ Role structure
 
 - The specified ``play`` contains ``tasks`` to execute. Example: play=``create_hub_edge_security_inbound.yaml``
 
-A) [SecOps] Attach a WAF policy to an Application
-==================================================
-Create and launch a job template ``poc-consul_nap-server_name_create``:
-
-=============================================================   =============================================       =============================================   =============================================   =============================================   =============================================   =============================================
-Job template                                                    objective                                           playbook                                        activity                                        inventory                                       limit                                           credential
-=============================================================   =============================================       =============================================   =============================================   =============================================   =============================================   =============================================
-``poc-consul_nap-server_name_create``                           Update Consul key/value store                       ``playbooks/poc-consul_agent.yaml``             ``nap-server_name_create``                      ``localhost``
-=============================================================   =============================================       =============================================   =============================================   =============================================   =============================================   =============================================
-
-==============================================  =============================================   ================================================================================================================================================================================================================
-Extra variable                                  Description                                     Example
-==============================================  =============================================   ================================================================================================================================================================================================================
-``extra_consul_path_source_of_truth``           Consul key path                                 ``poc_f5/inbound/nap``
-``extra_consul_agent_ip``                       Consul server IP                                ``10.100.0.60``
-``extra_consul_agent_port``                     Consul server port                              ``8500``
-``extra_consul_agent_scheme``                   Consul server scheme                            ``http``
-``extra_consul_datacenter``                     Consul datacenter                               ``Inbound``
-``extra_server_name``                           FQDN = NGINX CTRL Gateway::Hostname record      ``my-app.f5cloudbuilder.dev``
-``extra_server_properties``                     WAF policy properties                           ``{'waf_policy': 'secure_high-server_bundle1.json', 'enable': 'on'}``
-==============================================  =============================================   ================================================================================================================================================================================================================
-
-B) [DevOps] Deploy an Application
+A) [DevOps] Deploy an Application
 ==================================================
 Create and launch a workflow template ``wf-create-app_inbound_nginx_controller_nap`` that includes those Job templates in this order:
 
@@ -210,6 +188,30 @@ Extra variable                                  Description                     
       tls:
         crt: "-----BEGIN CERTIFICATE-----\r\n...\r\n...\r\n-----END CERTIFICATE-----"
         key: "-----BEGIN RSA PRIVATE KEY-----\r\n...-----END RSA PRIVATE KEY-----"
+
+
+B) [SecOps] Attach a specific WAF policy to an Application
+==================================================
+Create and launch a job template ``poc-consul_nap-server_name_create``:
+
+=============================================================   =============================================       =============================================   =============================================   =============================================   =============================================   =============================================
+Job template                                                    objective                                           playbook                                        activity                                        inventory                                       limit                                           credential
+=============================================================   =============================================       =============================================   =============================================   =============================================   =============================================   =============================================
+``poc-consul_nap-server_name_create``                           Update Consul key/value store                       ``playbooks/poc-consul_agent.yaml``             ``nap-server_name_create``                      ``localhost``
+=============================================================   =============================================       =============================================   =============================================   =============================================   =============================================   =============================================
+
+==============================================  =============================================   ================================================================================================================================================================================================================
+Extra variable                                  Description                                     Example
+==============================================  =============================================   ================================================================================================================================================================================================================
+``extra_consul_path_source_of_truth``           Consul key path                                 ``poc_f5/inbound/nap``
+``extra_consul_agent_ip``                       Consul server IP                                ``10.100.0.60``
+``extra_consul_agent_port``                     Consul server port                              ``8500``
+``extra_consul_agent_scheme``                   Consul server scheme                            ``http``
+``extra_consul_datacenter``                     Consul datacenter                               ``Inbound``
+``extra_server_name``                           FQDN = NGINX CTRL Gateway::Hostname record      ``my-app.f5cloudbuilder.dev``
+``extra_server_properties``                     WAF policy properties                           ``{'waf_policy': 'secure_high-server_bundle1.json', 'enable': 'on'}``
+==============================================  =============================================   ================================================================================================================================================================================================================
+
 
 C) [SecOps] Update WAF policies
 ==================================================
