@@ -20,11 +20,26 @@
     dest: "/etc/nginx/nap/"
 
 - name: Enable NAP module
-  blockinfile:
+  lineinfile:
     path: /etc/nginx/nginx.conf
+    firstmatch: yes
     insertbefore: "events {"
-    block: "{{ lookup('template','nap_module.json') }}"
-    marker: "# {mark} Ansible - Enable module"
+    line: "{{ lookup('template','nap_module.json') }}"
+
+- name: app protect directives
+  set_fact:
+    var_replace_app_protect:
+      - app_protect_enable
+      - app_protect_security_log
+      - app_protect_logging_str
+      - app_protect_security_log_enable
+
+- name: CLEAN - comment app protect configuration set by NGINX Controller
+  replace:
+    path: /etc/nginx/nginx.conf
+    regexp: '^(\s+{{ item }}.*)$'
+    replace: '#\1'
+  loop: "{{ var_replace_app_protect }}"
 
 - name: Enable WAF default policy
   blockinfile:
