@@ -46,8 +46,6 @@ Demo
 
     <a href="http://www.youtube.com/watch?v=wqIGWfW5Dmo"><img src="http://img.youtube.com/vi/wqIGWfW5Dmo/0.jpg" width="600" height="400" title="Automate an Application deployment" alt="Automate an Application deployment"></a>
 
-`MP4 link for F5 customers and partners <https://f5-my.sharepoint.com/:v:/r/personal/al_dacosta_f5_com/Documents/demo_video/NGINX%20Controller%20AD%20+%20NAP.mp4?csf=1&web=1&e=f3ljRv>`_
-
 Pre-requisites
 ==============
 
@@ -224,11 +222,9 @@ Create and launch a workflow template ``wf-nginx_managed-nap_update_waf_policy``
 =============================================================   =============================================       =============================================   =============================================   =============================================   =============================================   =============================================
 Job template                                                    objective                                           playbook                                        activity                                        inventory                                       limit                                           credential
 =============================================================   =============================================       =============================================   =============================================   =============================================   =============================================   =============================================
-``poc-nginx_controller-login``                                  GET authentication token                            ``playbooks/poc-nginx_controller.yaml``         ``login``                                       ``localhost``                                   ``localhost``
-``poc-nginx_controller-create_environment``                     Create an environment                               ``playbooks/poc-nginx_controller.yaml``         ``create_environment``                          ``localhost``                                   ``localhost``
 ``poc-azure_get-vmss-facts-credential_set``                     Get info of NGINX VMSS                              ``playbooks/poc-azure.yaml``                    ``get-vmss-facts``                              ``my_project``                                  ``localhost``                                   ``my_azure_credential``
-``poc-nginx_controller-create_gw_app_component_vmss_north``     Create App on North GW / WAF                        ``playbooks/poc-nginx_controller.yaml``         ``create_gw_app_component_vmss_north``          `localhost``                                    ``localhost``
-``wf-nginx_managed-nap_update_waf_policy``                      Apply WAF policies                                  ``workflow`` see use case (C)
+``poc-consul_list_json``                                        List policies per server name                       ``playbooks/poc-consul_agent.yaml``             ``list_json``                                   ``localhost``                                   ``localhost``
+``poc-nginx_managed-enable_nap``                                Create an environment                               ``playbooks/poc-nginx_vmss.yaml``               ``managed-enable_nap``                          ``localhost``                                   ``localhost``
 =============================================================   =============================================       =============================================   =============================================   =============================================   =============================================   =============================================
 
 ==============================================  =============================================   ================================================================================================================================================================================================================
@@ -245,7 +241,6 @@ Extra variable                                  Description                     
 ``extra_consul_agent_port``                     Consul server port                              ``8500``
 ``extra_consul_agent_scheme``                   Consul server scheme                            ``http``
 ``extra_consul_datacenter``                     Consul datacenter                               ``Inbound``
-``extra_app``                                   App specification                               see below
 ==============================================  =============================================   ================================================================================================================================================================================================================
 
 Webhook
